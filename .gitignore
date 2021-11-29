@@ -1,0 +1,14 @@
+/*.vsconfig
+/*.csproj
+/.vs
+/ItRF (Inside the Robot Fortress)
+/v16
+/*.suo
+/Library
+/Logs
+/obj
+/*.sln
+/Temp
+/UserSettings
+/ItRF (Inside the Robot Fortress).sln.DotSettings.user
+/.vscode
