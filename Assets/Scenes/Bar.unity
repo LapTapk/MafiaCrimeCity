@@ -24263,7 +24263,6 @@ GameObject:
   - component: {fileID: 270680356}
   - component: {fileID: 270680354}
   - component: {fileID: 270680353}
-  - component: {fileID: 270680357}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -24315,6 +24314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanMove: 1
+  _modifier:
+    IsAiming: 0
+    AimingSpeedReduce: 0.7
   LookingPoint: {x: 0, y: 0}
   _speed: 10
 --- !u!114 &270680354
@@ -24362,20 +24364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e394ba8da956bd545b2c1687ac93d795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &270680357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270680350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec131e67e9516242aa40499180a6c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AimingSpeedReduce: 0.7
-  IsAiming: 0
 --- !u!1 &298906911
 GameObject:
   m_ObjectHideFlags: 0
