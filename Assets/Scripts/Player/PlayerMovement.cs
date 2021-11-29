@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool CanMove = true;
+
+    private Vector2 _movement = Vector2.zero;
     public Vector2 Movement
     {
         get => _movement;
@@ -18,17 +20,18 @@ public class PlayerMovement : MonoBehaviour
             bool CordIsValid(float x) => x == 0 || x == -1 || x == 1;
         }
     }
-    public PlayerMovementModifier Modifier { get; private set; }
+    
+    [SerializeField] public PlayerMovementModifier _modifier;
+    public PlayerMovementModifier Modifier => _modifier; 
+
     [HideInInspector] public Vector2 LookingPoint;
     [SerializeField] private float _speed;
-    private Vector2 _movement = Vector2.zero;
     private float _defaultCameraZ;
     private Rigidbody2D _rb;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        Modifier = GetComponent<PlayerMovementModifier>();
         _defaultCameraZ = Camera.main.transform.position.z;
     }
 
@@ -39,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = _movement * ((CanMove ? 1 : 0) * _speed * Modifier.TotalValue);
+        _rb.velocity = _movement * ((CanMove ? 1 : 0) * _speed * _modifier.TotalValue);
         MoveCamera();
     }
 
