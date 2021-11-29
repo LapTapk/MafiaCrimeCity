@@ -1,21 +1,21 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using UnityEngine;
 
-public class PlayerMovementModifier : MonoBehaviour
+[Serializable]
+public class PlayerMovementModifier
 {
     public float TotalValue => _modifiers.Aggregate(1f, (prev, cur) => prev *= cur.Value());
-    public float AimingSpeedReduce = 0.7f;
     [HideInInspector] public bool IsAiming = false;
+    public float AimingSpeedReduce = 0.7f;
     private Dictionary<int, Func<float>> _modifiers = new Dictionary<int, Func<float>>();
 
-    private void Awake()
+    public PlayerMovementModifier()
     {
-        Add(() => (IsAiming ? AimingSpeedReduce : 1));
+        _modifiers.Add(0, () => (IsAiming ? AimingSpeedReduce : 1));
     }
 
     public int Add(Func<float> modifier)
@@ -31,16 +31,11 @@ public class PlayerMovementModifier : MonoBehaviour
         _modifiers.Remove(id);
     }
 
-    public void Add(Func<float> modifier, float duration)
-    {
-        StartCoroutine(CoroutineAddTemp(modifier, duration));
-    }
-
-    private IEnumerator CoroutineAddTemp(Func<float> modifier, float duration)
+    public async void AddTempAsync(Func<float> modifier, float duration)
     {
         var id = Add(modifier);
 
-        yield return new WaitForSeconds(duration);
+        await Task.Delay((int)(duration * 1e3));
 
         Remove(id);
     }
